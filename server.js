@@ -159,11 +159,15 @@ io.on("connection", (socket) => {
 });
 
 app.set(".", "html");
+console.log(__dirname);
+console.log(path.join(__dirname, "/"));
 app.use(express.static(path.join(__dirname, "/")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
+  console.log(req);
+  console.log(res);
   res.sendFile("index.html");
 });
 

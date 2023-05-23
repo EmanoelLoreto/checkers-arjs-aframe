@@ -98,7 +98,6 @@
       <a-plane position="7 0.3 7" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
 
       <!-- Peças -->
-
       <a-cylinder id="peca-branca-1" peca-branca-1 position="1 0.3 0" src="#textura-marmore-branco" height="0.3" radius="0.30"></a-cylinder>
       <a-cylinder id="peca-branca-2" peca-branca-2 position="3 0.3 0" src="#textura-marmore-branco" height="0.3" radius="0.30"></a-cylinder>
       <a-cylinder id="peca-branca-3" peca-branca-3 position="5 0.3 0" src="#textura-marmore-branco" height="0.3" radius="0.30"></a-cylinder>
@@ -195,6 +194,11 @@
 
       socket.emit('listRooms');
 
+      socket.on("playerConnected", (id) => {
+        console.log("ID do jogador:", id);
+        playerId = id;
+      });
+
       function createRoom() {
         let name = document.getElementById("input-nome-sala").value
 
@@ -222,6 +226,7 @@
         let listaElement = document.getElementById("lista-salas");
 
         const liElements = listaElement.querySelectorAll('li');
+
         liElements.forEach((li) => {
           li.remove();
         });
@@ -229,7 +234,6 @@
         if (rooms.length > 0) {
           const elemento = document.getElementById('span-nenhuma-sala');
           const pai = elemento?.parentNode;
-  
           pai?.removeChild(elemento);
 
           const playerJogando = rooms.find(room => room.players.find(playerIdSala => playerIdSala === playerId))
@@ -237,6 +241,8 @@
           if (playerJogando?.players.length > 0) {
             document.getElementById('content-modal-salas').style.display = "none"
             document.getElementById('content-modal-esperando-jogador').style.display = "flex"
+
+            return
           }
 
           rooms.forEach(function(item) {
@@ -246,15 +252,12 @@
 
             if (item.spectators.length > 0) {
               textContentLi = item?.name + ' - Players ' + item.players.length + '/2' + ' - Espectadores ' + item.spectators.length;
-              //document.getElementById('espectadores').setAttribute("text", "value", "Espectadores: " + item.spectators.length);
             } else {
               textContentLi = item?.name + ' - Players ' + item.players.length + '/2';
-              //document.getElementById('espectadores').setAttribute("text", "value", "");
             }
 
             li.textContent = textContentLi;
             li.addEventListener('click', function () {
-              console.log(item.players.length)
               if (item.players.length < 2) {
                 socket.emit('joinRoom', item?.name);
               } else {
@@ -269,11 +272,6 @@
 
       socket.on('roomCreated', room => {
         console.log('Sala criada:', room);
-      });
-
-      socket.on("playerConnected", (id) => {
-        console.log("ID do jogador:", id);
-        playerId = id;
       });
 
       socket.on('roomJoined', room => {
@@ -313,7 +311,6 @@
       });
 
       socket.on('joinAsEspectatorClient', (data) => {
-        console.log('joinAsEspectatorClient', data)
         isSpectator = true
         spectatorId = data?.spectatorId
 
@@ -335,7 +332,6 @@
 
       socket.on('jogada', data => {
         const { row, col, id, cor } = data.selectedPiece
-        console.log(data)
 
         board = data.board
 
@@ -349,7 +345,6 @@
       });
 
       socket.on('removerPeca', data => {
-        console.log(data)
         const elemento = document.querySelector(`[position-board="${data.valueAttribute}"]`);
         const pai = elemento?.parentNode;
 

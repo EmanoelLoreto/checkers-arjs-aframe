@@ -22,15 +22,22 @@ const rooms = new Map(); // Mapa para armazenar as salas criadas
 io.on("connection", (socket) => {
   const playerId = socket.id;
 
+  // Evento para listar todas as salas para apenas o usuário do socket
   function emitRoomListSocket() {
     const roomList = Array.from(rooms.values());
     socket.emit('roomList', roomList);
   }
 
+  // Evento para listar todas as salas para todos os usuários da rede
   function emitRoomListIo() {
     const roomList = Array.from(rooms.values());
     io.emit('roomList', roomList);
   }
+
+  // Evento para listar todas as salas
+  socket.on('listRooms', () => {
+    emitRoomListSocket()
+  });
 
   // Enviar o ID do socket para o cliente
   socket.emit("playerConnected", playerId);
@@ -42,18 +49,30 @@ io.on("connection", (socket) => {
       players: [socket.id],
       spectators: []
     };
+
     rooms.set(roomName, room);
     socket.join(roomName);
     socket.emit('roomCreated', room);
-    console.log(`Sala "${roomName}" criada.`);
-    console.log('aqui 3');
     emitRoomListIo()
   });
 
-  // Evento para listar todas as salas
-  socket.on('listRooms', () => {
-    console.log('aqui 2');
-    emitRoomListSocket()
+  // Evento para lidar com a desconexão do jogador
+  socket.on('quitRoom', () => {
+    const roomName = getRoomNameBySocketId(socket.id);
+    if (roomName) {
+      const room = rooms.get(roomName);
+      if (room) {
+        room.players = room.players.filter(playerId => playerId !== socket.id);
+        room.spectators = room.spectators.filter(spectatorsId => spectatorsId !== socket.id);
+        if (room.players.length === 0) {
+          rooms.delete(roomName);
+          emitRoomListIo()
+        } else {
+          io.to(roomName).emit('playerLeft', socket.id);
+          emitRoomListIo()
+        }
+      }
+    }
   });
 
   // Evento para entrar em uma sala existente
@@ -94,27 +113,6 @@ io.on("connection", (socket) => {
         room.spectators = room.spectators.filter(spectatorsId => spectatorsId !== socket.id);
         if (room.players.length === 0) {
           rooms.delete(roomName);
-          console.log(`Sala "${roomName}" foi removida.`);
-          emitRoomListIo()
-        } else {
-          io.to(roomName).emit('playerLeft', socket.id);
-          emitRoomListIo()
-        }
-      }
-    }
-  });
-
-  // Evento para lidar com a desconexão do jogador
-  socket.on('quitRoom', () => {
-    const roomName = getRoomNameBySocketId(socket.id);
-    if (roomName) {
-      const room = rooms.get(roomName);
-      if (room) {
-        room.players = room.players.filter(playerId => playerId !== socket.id);
-        room.spectators = room.spectators.filter(spectatorsId => spectatorsId !== socket.id);
-        if (room.players.length === 0) {
-          rooms.delete(roomName);
-          console.log(`Sala "${roomName}" foi removida.`);
           emitRoomListIo()
         } else {
           io.to(roomName).emit('playerLeft', socket.id);

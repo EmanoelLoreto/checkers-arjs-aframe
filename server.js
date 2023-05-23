@@ -1,23 +1,18 @@
 const path = require("path");
-const http = require("http");
-// const https = require("https");
+const https = require("https");
 const { Server } = require("socket.io");
 const fs = require("fs");
 
 const express = require("express");
 const app = express();
 
-// http
-const server = http.createServer(app);
-
-// https
-// const server = https.createServer(
-//   {
-//     key: fs.readFileSync(path.join(__dirname, "key.pem")),
-//     cert: fs.readFileSync(path.join(__dirname, "cert.pem")),
-//   },
-//   app
-// );
+const server = https.createServer(
+  {
+    key: fs.readFileSync(path.join(__dirname, "key.pem")),
+    cert: fs.readFileSync(path.join(__dirname, "cert.pem")),
+  },
+  app
+);
 
 const io = new Server(server);
 
@@ -159,15 +154,11 @@ io.on("connection", (socket) => {
 });
 
 app.set(".", "html");
-console.log(__dirname);
-console.log(path.join(__dirname, "/"));
 app.use(express.static(path.join(__dirname, "/")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
-  console.log(req);
-  console.log(res);
   res.sendFile("index.html");
 });
 

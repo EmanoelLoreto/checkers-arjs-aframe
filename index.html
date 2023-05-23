@@ -5,7 +5,7 @@
     <title>Tabuleiro de Dama em ARJS e Aframe</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
-    <!-- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script> -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -179,6 +179,16 @@
       </div>
     </div>
 
+    <div id="content-modal-vencedor">
+      <h2>Vencedor</h2>
+
+      <h3 id="nome-vencedor"></h3>
+
+      <img src="./assets/primeiro-lugar.png" id="primeiro-lugar" />
+
+      <button id="button-desconectar" onclick="quitRoom()">Desconectar</button>
+    </div>
+
     <script>
       const socket = io()
 
@@ -254,7 +264,6 @@
 
             li.textContent = textContentLi;
             li.addEventListener('click', function () {
-              console.log(item.players.length)
               if (item.players.length < 2) {
                 socket.emit('joinRoom', item?.name);
               } else {
@@ -340,6 +349,7 @@
         board = data.board
 
         exibe()
+        checkGameOver()
 
         document.getElementById(id).setAttribute('position', { x: data.col, z: data.row, y: 0.3 });
         document.getElementById(id).setAttribute("position-board", cor + `-${data.col}-${data.row}`);
@@ -555,6 +565,35 @@
         socket.emit('updateBoard', { selectedPiece, row, col, board });
       }
 
+      // Função para verificar se um jogador não tem mais peças no tabuleiro
+      function isPlayerOutOfPieces(player) {
+        for (let row = 0; row < BOARD_SIZE; row++) {
+          for (let col = 0; col < BOARD_SIZE; col++) {
+            if (board[row][col] === player) {
+              return false; // O jogador ainda tem peças no tabuleiro
+            }
+          }
+        }
+        return true; // O jogador não tem mais peças no tabuleiro
+      }
+
+      // Verificar se o jogo acabou e quem ganhou
+      function checkGameOver() {
+        if (isPlayerOutOfPieces(WHITE)) {
+          console.log('O jogador BLACK venceu!');
+          isSpectator = true
+          document.getElementById("nome-vencedor").innerHTML = "Jogador 2"
+          document.getElementById('content-modal-vencedor').style.display = "flex"
+        } else if (isPlayerOutOfPieces(BLACK)) {
+          console.log('O jogador WHITE venceu!');
+          isSpectator = true
+          document.getElementById("nome-vencedor").innerHTML = "Jogador 1"
+          document.getElementById('content-modal-vencedor').style.display = "flex"
+        } else {
+          console.log('O jogo continua...');
+        }
+      }
+
       // Variáveis de configuração
       const EMPTY = 0;
       const WHITE = 1;
@@ -600,7 +639,7 @@
       opacity: 30%;
     }
 
-    #content-modal-salas, #content-modal-esperando-jogador {
+    #content-modal-salas, #content-modal-esperando-jogador, #content-modal-vencedor {
       position: absolute;
       display: flex;
       flex-direction: column;
@@ -697,6 +736,31 @@
       left: 20px;
       bottom: 20px;
       right: unset;
+    }
+
+    #content-modal-vencedor {
+      align-items: center;
+      display: none;
+    }
+
+    @keyframes pulseAnimation {
+      0% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+      }
+      50% {
+        -webkit-transform: scale(0.9);
+                transform: scale(0.9);
+      }
+      100% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+      }
+    }
+
+    #primeiro-lugar {
+      width: 200px;
+      animation: pulseAnimation 3s ease-in-out infinite both;
     }
 
     @keyframes ldio-dq3yqct2vkg-1 {

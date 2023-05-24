@@ -5,7 +5,7 @@
     <title>Tabuleiro de Dama em ARJS e Aframe</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
-    <!-- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script> -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,9 +20,22 @@
         <img id="textura-marmore-roxo" src="./assets/textura-marmore-roxo.jpg">
       </a-assets>
 
-      <a-plane src="#madeira" position="3.5 0.1 3.4" rotation="-90 0 0" width="12" height="12" color="#4b3621"></a-plane>
+      <!-- Camera -->
+      <!-- <a-camera id="camera" look-controls="enabled: true" wasd-controls="enabled: true" position="3.5 25 30" preset="hiro">
+        <a-cursor color="#fff"></a-cursor>
+      </a-camera> -->
+
+      <a-marker-camera preset="hiro" position="5 10 10" rotation="-90 0 0" look-controls="enabled: true" wasd-controls="enabled: true">
+        <a-camera position="0 0 0" look-controls="enabled: true" wasd-controls="enabled: true"></a-camera>
+        <a-cursor color="#fff"></a-cursor>
+      </a-marker-camera>
+
+      <!-- <a-entity environment="preset: japan"></a-entity> -->
 
       <!-- Tabuleiro -->
+      <a-marker>
+
+      <a-plane src="#madeira" position="3.5 0.1 3.4" rotation="-90 0 0" width="12" height="12" color="#4b3621"></a-plane>
       <a-plane position="3.5 0.2 3.4" rotation="-90 -0.1 0" width="8.4" height="8.4" src="#textura-marmore-branco"></a-plane>
 
       <a-plane position="0 0.3 0" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
@@ -137,13 +150,7 @@
 
       <a-entity id="jogador-atual" text="value: Jogador 1" scale="20 20" position="8.5 0.3 11.5" rotation="-90 -90 0"></a-entity>
       <a-entity id="espectadores" text="value: " scale="20 20" position="-1.5 0.3 -3.5" rotation="-90 90 0"></a-entity>
-
-      <!-- Camera -->
-      <a-camera id="camera" look-controls="enabled: true" wasd-controls="enabled: true" position="3.5 6 8">
-        <a-cursor color="#fff"></a-cursor>
-      </a-camera>
-
-      <a-entity environment="preset: japan"></a-entity>
+    </a-marker>
     </a-scene>
 
     <div id="background-modal"></div>
@@ -176,6 +183,16 @@
 
       <button id="button-desconectar" onclick="quitRoom()">Desconectar</button>
       </div>
+    </div>
+
+    <div id="content-modal-vencedor">
+      <h2>Vencedor</h2>
+
+      <h3 id="nome-vencedor"></h3>
+
+      <img src="./assets/primeiro-lugar.png" id="primeiro-lugar" />
+
+      <button id="button-desconectar" onclick="quitRoom()">Desconectar</button>
     </div>
 
     <script>
@@ -336,6 +353,7 @@
         board = data.board
 
         exibe()
+        checkGameOver()
 
         document.getElementById(id).setAttribute('position', { x: data.col, z: data.row, y: 0.3 });
         document.getElementById(id).setAttribute("position-board", cor + `-${data.col}-${data.row}`);
@@ -550,6 +568,35 @@
         socket.emit('updateBoard', { selectedPiece, row, col, board });
       }
 
+      // Função para verificar se um jogador não tem mais peças no tabuleiro
+      function isPlayerOutOfPieces(player) {
+        for (let row = 0; row < BOARD_SIZE; row++) {
+          for (let col = 0; col < BOARD_SIZE; col++) {
+            if (board[row][col] === player) {
+              return false; // O jogador ainda tem peças no tabuleiro
+            }
+          }
+        }
+        return true; // O jogador não tem mais peças no tabuleiro
+      }
+
+      // Verificar se o jogo acabou e quem ganhou
+      function checkGameOver() {
+        if (isPlayerOutOfPieces(WHITE)) {
+          console.log('O jogador BLACK venceu!');
+          isSpectator = true
+          document.getElementById("nome-vencedor").innerHTML = "Jogador 2"
+          document.getElementById('content-modal-vencedor').style.display = "flex"
+        } else if (isPlayerOutOfPieces(BLACK)) {
+          console.log('O jogador WHITE venceu!');
+          isSpectator = true
+          document.getElementById("nome-vencedor").innerHTML = "Jogador 1"
+          document.getElementById('content-modal-vencedor').style.display = "flex"
+        } else {
+          console.log('O jogo continua...');
+        }
+      }
+
       // Variáveis de configuração
       const EMPTY = 0;
       const WHITE = 1;
@@ -595,7 +642,7 @@
       opacity: 30%;
     }
 
-    #content-modal-salas, #content-modal-esperando-jogador {
+    #content-modal-salas, #content-modal-esperando-jogador, #content-modal-vencedor {
       position: absolute;
       display: flex;
       flex-direction: column;
@@ -657,7 +704,7 @@
       border-radius: 20px;
       border: 2px solid #C3B1E1;
       height: 22px; 
-      width: 250px;
+      width: 85%;
     }
 
     #message-error-input {
@@ -692,6 +739,31 @@
       left: 20px;
       bottom: 20px;
       right: unset;
+    }
+
+    #content-modal-vencedor {
+      align-items: center;
+      display: none;
+    }
+
+    @keyframes pulseAnimation {
+      0% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+      }
+      50% {
+        -webkit-transform: scale(0.9);
+                transform: scale(0.9);
+      }
+      100% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+      }
+    }
+
+    #primeiro-lugar {
+      width: 200px;
+      animation: pulseAnimation 3s ease-in-out infinite both;
     }
 
     @keyframes ldio-dq3yqct2vkg-1 {

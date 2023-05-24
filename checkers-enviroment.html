@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Tabuleiro de Dama em ARJS e Aframe</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  </head>
+  <body style='margin: 0px; overflow: hidden; display: flex; justify-content: center; align-items: center'>
+    <a-scene vr-mode-ui="enabled: false">
+      <a-assets>
+        <img id="madeira" src="./assets/madeira.jpg">
+        <img id="textura-marmore-preto" src="./assets/textura-marmore-preto.png">
+        <img id="textura-marmore-branco" src="./assets/textura-marmore-branco.jpg">
+        <img id="textura-marmore-roxo" src="./assets/textura-marmore-roxo.jpg">
+      </a-assets>
+
+      <a-plane position="3.5 1 3.4" rotation="-90 0 0" width="16" height="16" src="#madeira" color="#4b3621"></a-plane>
+      <a-plane position="3.5 1.9 3.5" rotation="-90 0 0" width="8.6" height="8.6" src="#textura-marmore-branco"></a-plane>
+
+      <a-plane position="0 2 0" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="1 2 0" clickable-row-1 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="2 2 0" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="3 2 0" clickable-row-2 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="4 2 0" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="5 2 0" clickable-row-3 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="6 2 0" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="7 2 0" clickable-row-4 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+
+      <a-plane position="0 2 1" clickable-row-5 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="1 2 1" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="2 2 1" clickable-row-6 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="3 2 1" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="4 2 1" clickable-row-7 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="5 2 1" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="6 2 1" clickable-row-8 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="7 2 1" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+
+      <a-plane position="0 2 2" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="1 2 2" clickable-row-9 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="2 2 2" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="3 2 2" clickable-row-10 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="4 2 2" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="5 2 2" clickable-row-11 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="6 2 2" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="7 2 2" clickable-row-12 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+
+      <a-plane position="0 2 3" clickable-row-13 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="1 2 3" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="2 2 3" clickable-row-14 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="3 2 3" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="4 2 3" clickable-row-15 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="5 2 3" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="6 2 3" clickable-row-16 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="7 2 3" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+
+      <a-plane position="0 2 4" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="1 2 4" clickable-row-17 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="2 2 4" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="3 2 4" clickable-row-18 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="4 2 4" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="5 2 4" clickable-row-19 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="6 2 4" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="7 2 4" clickable-row-20 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+
+      <a-plane position="0 2 5" clickable-row-21 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="1 2 5" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="2 2 5" clickable-row-22 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="3 2 5" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="4 2 5" clickable-row-23 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="5 2 5" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="6 2 5" clickable-row-24 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="7 2 5" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+
+      <a-plane position="0 2 6" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="1 2 6" clickable-row-25 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="2 2 6" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="3 2 6" clickable-row-26 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="4 2 6" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="5 2 6" clickable-row-27 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="6 2 6" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="7 2 6" clickable-row-28 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+
+      <a-plane position="0 2 7" clickable-row-29 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="1 2 7" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="2 2 7" clickable-row-30 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="3 2 7" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="4 2 7" clickable-row-31 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="5 2 7" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+      <a-plane position="6 2 7" clickable-row-32 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="7 2 7" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
+
+      <!-- Peças -->
+      <a-cylinder position="1 2.03 0" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-1" peca-branca-1></a-cylinder>
+      <a-cylinder position="3 2.03 0" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-2" peca-branca-2></a-cylinder>
+      <a-cylinder position="5 2.03 0" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-3" peca-branca-3></a-cylinder>
+      <a-cylinder position="7 2.03 0" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-4" peca-branca-4></a-cylinder>
+
+      <a-cylinder position="0 2.03 1" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-5" peca-branca-5></a-cylinder>
+      <a-cylinder position="2 2.03 1" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-6" peca-branca-6></a-cylinder>
+      <a-cylinder position="4 2.03 1" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-7" peca-branca-7></a-cylinder>
+      <a-cylinder position="6 2.03 1" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-8" peca-branca-8></a-cylinder>
+
+      <a-cylinder position="1 2.03 2" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-9" peca-branca-9></a-cylinder>
+      <a-cylinder position="3 2.03 2" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-10" peca-branca-10></a-cylinder>
+      <a-cylinder position="5 2.03 2" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-11" peca-branca-11></a-cylinder>
+      <a-cylinder position="7 2.03 2" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-12" peca-branca-12></a-cylinder>
+
+      <a-cylinder position="0 2.03 5" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-1" peca-preta-1></a-cylinder>
+      <a-cylinder position="2 2.03 5" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-2" peca-preta-2></a-cylinder>
+      <a-cylinder position="4 2.03 5" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-3" peca-preta-3></a-cylinder>
+      <a-cylinder position="6 2.03 5" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-4" peca-preta-4></a-cylinder>
+
+      <a-cylinder position="1 2.03 6" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-5" peca-preta-5></a-cylinder>
+      <a-cylinder position="3 2.03 6" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-6" peca-preta-6></a-cylinder>
+      <a-cylinder position="5 2.03 6" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-7" peca-preta-7></a-cylinder>
+      <a-cylinder position="7 2.03 6" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-8" peca-preta-8></a-cylinder>
+
+      <a-cylinder position="0 2.03 7" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-9" peca-preta-9></a-cylinder>
+      <a-cylinder position="2 2.03 7" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-10" peca-preta-10></a-cylinder>
+      <a-cylinder position="4 2.03 7" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-11" peca-preta-11></a-cylinder>
+      <a-cylinder position="6 2.03 7" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-12" peca-preta-12></a-cylinder>
+
+      <a-entity text="value: Jogador 1" scale="20 20" position="11 4 -5" rotation="0 0 0"></a-entity>
+      <a-entity id="nome-oponente" text="value: Player ID" scale="20 20" position="11 3 -5" rotation="0 0 0"></a-entity>
+      
+      <a-entity text="value: Jogador 2" scale="20 20" position="-5 4 12" rotation="0 180 0"></a-entity>
+      <a-entity id="nome-jogador" text="value: Player ID" scale="20 20" position="-5 3 12" rotation="0 180 0"></a-entity>
+
+      <a-entity id="jogador-atual" text="value: Jogador 1" scale="20 20" position="8.5 2.05 11.5" rotation="-90 -90 0"></a-entity>
+
+      <!-- Camera -->
+      <a-camera id="camera" look-controls="enabled: true; pointerLockEnabled: true" wasd-controls="enabled: false" position="3.5 10 8">
+        <a-cursor color="#fff"></a-cursor>
+      </a-camera>
+
+      <a-entity environment="preset: japan;" ></a-entity>
+    </a-scene>
+
+    <div id="background-modal"></div>
+    <div id="content-modal-salas">
+      <h2>Lista de salas</h2>
+      <span id="clique-em-uma-sala"></span>
+      <ul id="lista-salas"></ul>
+
+      <div id="container-criar-sala">
+        <h3>Criar nova sala</h2>
+
+        <div style="display: flex; position: relative; width: 100%;">
+          <div style="display: flex; flex-direction: column; width: 100%; margin-right: 25px;">
+            <input id="input-nome-sala" type="text" placeholder="Insira o nome para a sala"/>
+            <span id="message-error-input"></span>
+          </div>
+          <button id="button-criar-sala" onclick="createRoom()">Criar sala</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="content-modal-esperando-jogador" style="display: none;">
+      <h2>Aguardando outro jogador para inciar!</h2>
+
+      <div class="loadingio-spinner-bean-eater-oi9uh73mnpl"><div class="ldio-dq3yqct2vkg">
+      <div><div></div><div></div><div></div></div><div><div></div><div></div><div></div></div>
+      </div></div>
+
+
+      <button id="button-desconectar" onclick="quitRoom()">Desconectar</button>
+      </div>
+    </div>
+
+    <div id="content-modal-vencedor">
+      <h2>Vencedor</h2>
+
+      <h3 id="nome-vencedor"></h3>
+
+      <img src="./assets/primeiro-lugar.png" id="primeiro-lugar" />
+
+      <button id="button-desconectar" onclick="quitRoom()">Desconectar</button>
+    </div>
+
+    <script>
+      const socket = io()
+
+      var playerId = null
+      var roomPlayers = null
+      var selectedPiece = null
+      var alreadyPlaying = false
+      var isSpectator = false
+      var spectatorId = false
+      var localRoom = []
+      var canPlay = true
+
+      var player1 = null
+      var player2 = null
+
+      socket.emit('listRooms');
+
+      socket.on("playerConnected", (id) => {
+        console.log("ID do jogador:", id);
+        playerId = id;
+      });
+
+      function createRoom() {
+        let name = document.getElementById("input-nome-sala").value
+
+        if (!!name && name != '') {
+          socket.emit('createRoom', name);
+          document.getElementById("message-error-input").innerHTML = ""
+          document.getElementById("input-nome-sala").value = ''
+        } else {
+          document.getElementById("message-error-input").innerHTML = "Insira um nome válido para a sala."
+        }
+      }
+
+      function quitRoom() {
+        socket.emit('quitRoom')
+
+        document.getElementById('content-modal-salas').style.display = "flex"
+        document.getElementById('content-modal-esperando-jogador').style.display = "none"
+      }
+
+      socket.on('roomList', rooms => {
+        console.log('Lista de salas:', rooms);
+
+        if (alreadyPlaying) return
+
+        let listaElement = document.getElementById("lista-salas");
+
+        const liElements = listaElement.querySelectorAll('li');
+
+        liElements.forEach((li) => {
+          li.remove();
+        });
+
+        if (rooms.length > 0) {
+          document.getElementById('clique-em-uma-sala').innerHTML = 'Clique em uma sala para entrar'
+
+          const elemento = document.getElementById('span-nenhuma-sala');
+          const pai = elemento?.parentNode;
+          pai?.removeChild(elemento);
+
+          const playerJogando = rooms.find(room => room.players.find(playerIdSala => playerIdSala === playerId))
+
+          if (playerJogando?.players.length > 0) {
+            document.getElementById('content-modal-salas').style.display = "none"
+            document.getElementById('content-modal-esperando-jogador').style.display = "flex"
+
+            return
+          }
+
+          rooms.forEach(function(item) {
+            let li = document.createElement("li");
+
+            let textContentLi = ''
+
+            if (item.spectators.length > 0) {
+              textContentLi = item?.name + ' - Players ' + item.players.length + '/2' + ' - Espectadores ' + item.spectators.length;
+            } else {
+              textContentLi = item?.name + ' - Players ' + item.players.length + '/2';
+            }
+
+            li.textContent = textContentLi;
+            li.addEventListener('click', function () {
+              if (item.players.length < 2) {
+                socket.emit('joinRoom', item?.name);
+              } else {
+                socket.emit('joinRoomAsSpectator', item?.name);
+              }
+            })
+
+            listaElement.appendChild(li);
+          });
+        } else {
+          document.getElementById('clique-em-uma-sala').innerHTML = 'Nenhuma sala encontrada! Que tal criar uma?'
+        }
+      });
+
+      socket.on('roomCreated', room => {
+        console.log('Sala criada:', room);
+      });
+
+      socket.on('roomJoined', room => {
+        console.log('Entrou na sala:', room);
+      });
+
+      socket.on('roomError', error => {
+        console.error('Erro na sala:', error);
+      });
+
+      socket.on('startGame', (room) => {
+        alreadyPlaying = true
+        roomPlayers = room
+        localRoom = room
+
+        document.getElementById('background-modal').style.display = "none"
+        document.getElementById('content-modal-salas').style.display = "none"
+        document.getElementById('content-modal-esperando-jogador').style.display = "none"
+
+        player1 = room.players[0]
+        document.getElementById('nome-jogador').setAttribute("text", "value", "ID: " + room.players[0]);
+
+        player2 = room.players[1]
+        document.getElementById('nome-oponente').setAttribute("text", "value", "ID: " + room.players[1]);
+
+        const camera = document.getElementById("camera");
+        if (playerId == room.players[0]) {
+          camera.setAttribute("position", "3.5 9 8");
+
+          camera.setAttribute("rotation", "-90 0 0");
+        } else {
+          camera.setAttribute("position", "3.5 9 -1");
+
+          camera.setAttribute("rotation", "-90 0 0");
+        }
+
+        currentPlayer = WHITE;
+
+        console.log('O jogo começou!', room);
+      });
+
+      socket.on('joinAsEspectatorClient', (data) => {
+        isSpectator = true
+        spectatorId = data?.spectatorId
+
+        document.getElementById('background-modal').style.display = "none"
+        document.getElementById('content-modal-salas').style.display = "none"
+        document.getElementById('content-modal-esperando-jogador').style.display = "none"
+
+        camera.setAttribute("position", "-2 6 3.5");
+      })
+
+      socket.on('playerLeft', playerId => {
+        if (player1 == playerId) {
+          document.getElementById('nome-jogador').setAttribute("text", "value", "");
+        } else if (player2 == playerId) {
+          document.getElementById('nome-oponente').setAttribute("text", "value", "");
+        }
+        console.log(`Jogador ${playerId} saiu da sala.`);
+      });
+
+      socket.on('jogada', data => {
+        const { row, col, id, cor } = data.selectedPiece
+
+        currentPlayer = currentPlayer === WHITE ? BLACK : WHITE;
+        board = data.board
+        
+        exibe()
+        checkGameOver()
+        
+        canPlay = true
+
+        document.getElementById(id).setAttribute('position', { x: data.col, z: data.row, y: 2.03 });
+        document.getElementById(id).setAttribute("position-board", cor + `-${data.col}-${data.row}`);
+
+        document.getElementById('jogador-atual').setAttribute("text", "value", "Jogador " + currentPlayer);
+      });
+
+      socket.on('removerPeca', data => {
+        const elemento = document.querySelector(`[position-board="${data.valueAttribute}"]`);
+        const pai = elemento?.parentNode;
+
+        pai?.removeChild(elemento);
+      });
+
+      for (let i = 1; i < 13; i++) {
+        AFRAME.registerComponent(`peca-branca-${i}`, {
+          init: function () {
+            let el = this.el;
+            let position = el.object3D.position
+            let timeoutId = null;
+
+            el.addEventListener('mouseenter', function (event) {
+              if (!isSpectator && roomPlayers.players[1] == playerId && currentPlayer == WHITE && canPlay) {
+                document.getElementById(`peca-branca-${i}`).setAttribute('position', { ...position, y: 2.2 });
+
+                timeoutId = setTimeout(() => {
+                  if (selectedPiece == null) {
+                    document.getElementById(`peca-branca-${i}`).setAttribute("color", "rgb(255,215,0)");
+                    selectedPiece = { row: position.z, col: position.x, id: `peca-branca-${i}`, cor: 'branca' }
+                  } else if (selectedPiece.id != `peca-branca-${i}`) {
+                    let oldSelectPositionPiece = document.getElementById(selectedPiece.id).getAttribute('position')
+                    document.getElementById(selectedPiece.id).setAttribute("color", "");
+                    document.getElementById(selectedPiece.id).setAttribute('position', { ...oldSelectPositionPiece, y: 2.03 });
+
+                    document.getElementById(`peca-branca-${i}`).setAttribute("color", "rgb(255,215,0)");
+                    document.getElementById(`peca-branca-${i}`).setAttribute('position', { ...position, y: 2.2 });
+                    selectedPiece = { row: position.z, col: position.x, id: `peca-branca-${i}`, cor: 'branca' }
+                  }
+                }, 700)
+              }
+            });
+            el.addEventListener('mouseleave', function (event) {
+              if (!isSpectator) {
+                document.getElementById(`peca-branca-${i}`).setAttribute('position', { ...position, y: 2.03 });
+                clearTimeout(timeoutId);
+              }
+            });
+          }
+        });
+
+        AFRAME.registerComponent(`peca-preta-${i}`, {
+          init: function () {
+            let el = this.el;
+            let position = el.object3D.position
+            let timeoutId = null;
+        
+            el.addEventListener('mouseenter', function (event) {
+              if (!isSpectator && roomPlayers.players[0] == playerId && currentPlayer == BLACK && canPlay) {
+                document.getElementById(`peca-preta-${i}`).setAttribute('position', { ...position, y: 2.2 });
+                timeoutId = setTimeout(() => {
+        
+                  if (selectedPiece == null) {
+                    document.getElementById(`peca-preta-${i}`).setAttribute("color", "rgb(255,215,0)");
+                    selectedPiece = { row: position.z, col: position.x, id: `peca-preta-${i}`, cor: 'preta' }
+                  } else if (selectedPiece.id != `peca-preta-${i}`) {
+                    let oldSelectPositionPiece = document.getElementById(selectedPiece.id).getAttribute('position');
+                    document.getElementById(selectedPiece.id).setAttribute("color", "");
+                    document.getElementById(selectedPiece.id).setAttribute('position', { ...oldSelectPositionPiece, y: 2.03 });
+        
+                    document.getElementById(`peca-preta-${i}`).setAttribute("color", "rgb(255,215,0)");
+                    selectedPiece = { row: position.z, col: position.x, id: `peca-preta-${i}`, cor: 'preta' }
+                  }
+                }, 700);
+              }
+            });
+        
+            el.addEventListener('mouseleave', function (event) {
+              if (!isSpectator) {
+                document.getElementById(`peca-preta-${i}`)?.setAttribute('position', { ...position, y: 2.03 });
+                clearTimeout(timeoutId); 
+              }
+            });
+          }
+        });
+      }
+
+      for (let i = 1; i < 33; i++) {
+        AFRAME.registerComponent(`clickable-row-${i}`, {
+          init: function () {
+            let el = this.el;
+            let timeoutId = null;
+            let {x, z} = el.object3D.position
+
+            el.addEventListener('mouseenter', function (event) {
+              timeoutId = setTimeout(() => {
+                if (!isSpectator && selectedPiece) {
+                  handleClick(z, x)
+                }
+              }, 700);
+            });
+            el.addEventListener('mouseleave', function (event) {
+              if (!isSpectator) {
+                clearTimeout(timeoutId);
+              }
+            });
+          }
+        });
+      }
+
+      function handleClick(row, col) {
+        if (selectedPiece) {
+          if (isValidMove(selectedPiece, row, col)) {
+            movePiece(selectedPiece, row, col);
+            updateBoard(selectedPiece, row, col);
+            canPlay = false
+            selectedPiece = null;
+          } else {
+            console.info('Movimento inválido!');
+          }
+        }
+      }
+
+      function isPieceColorValid(piece) {
+        return (currentPlayer === WHITE && piece === WHITE) || (currentPlayer === BLACK && piece === BLACK);
+      }
+
+      function isValidMove(piece, destRow, destCol) {
+        const { row, col } = piece;
+      
+        if (board[destRow][destCol] !== EMPTY) {
+          return false;
+        }
+      
+        // Verifique a direção do movimento com base na cor da peça
+        const direction = currentPlayer === WHITE ? 1 : -1;
+      
+        // Verifique se é um movimento válido na diagonal para frente
+        if (destRow === (row + direction) && Math.abs(destCol - col) === 1) {
+          // Movimento simples na diagonal para frente
+          return true;
+        } else if (destRow === (row + 2 * direction) && Math.abs(destCol - col) === 2) {
+          // Captura de uma peça adversária pulando sobre ela
+          const capturedRow = row + direction;
+          const capturedCol = (destCol + col) / 2;
+
+          if (board[capturedRow][capturedCol] !== EMPTY && !isPieceColorValid(board[capturedRow][capturedCol])) {
+            const valueAttribute = currentPlayer === BLACK ? `branca-${capturedCol}-${capturedRow}` : `preta-${capturedCol}-${capturedRow}`
+            const elemento = document.querySelector(`[position-board="${valueAttribute}"]`);
+            const pai = elemento.parentNode;
+
+            pai.removeChild(elemento);
+
+            socket.emit('removePiece', { valueAttribute });
+
+            return true;
+          }
+        }
+      
+        return false;
+      }
+
+      // Função para mover uma peça para a célula de destino
+      function movePiece(piece, destRow, destCol) {
+        const { row, col, id, cor } = piece;
+        
+        // Mova a peça para a célula de destino
+        document.getElementById(id).setAttribute('position', { x: destCol, z: destRow, y: 2.03 });
+        document.getElementById(id).setAttribute("color", "");
+        document.getElementById(id).setAttribute("position-board", cor + `-${destCol}-${destRow}`);
+        board[destRow][destCol] = board[row][col];
+        board[row][col] = EMPTY;
+
+        // Verifique se a peça alcançou a linha final e deve ser promovida a uma dama
+        if (shouldPromote(destRow)) {
+          promotePiece(destRow, destCol);
+        }
+
+        // Verifique se houve captura de uma peça adversária
+        if (Math.abs(destRow - row) === 2 && Math.abs(destCol - col) === 2) {
+          const capturedRow = (destRow + row) / 2;
+          const capturedCol = (destCol + col) / 2;
+
+          // Remova a peça adversária capturada do tabuleiro
+          board[capturedRow][capturedCol] = EMPTY;
+        }
+      }
+
+      // Função para verificar se uma peça deve ser promovida a uma dama
+      function shouldPromote(row) {
+        return (currentPlayer === WHITE && row === 0) || (currentPlayer === BLACK && row === BOARD_SIZE - 1);
+      }
+
+      // Função para promover uma peça a uma dama
+      function promotePiece(row, col) {
+        const piece = board[row][col];
+        const promotedPiece = currentPlayer === WHITE ? WHITE_KING : BLACK_KING;
+        board[row][col] = promotedPiece;
+      }
+
+      function exibe() {
+        for (let lin = 0; lin < 8; lin++) {
+          let row = "";
+          for (let col = 0; col < 8; col++) {
+            row += board[lin][col] + "  ";
+          }
+          console.log(row);
+        }
+      }
+
+      // Função para atualizar o tabuleiro no HTML
+      function updateBoard(selectedPiece, row, col) {
+        socket.emit('updateBoard', { selectedPiece, row, col, board });
+      }
+
+      // Função para verificar se um jogador não tem mais peças no tabuleiro
+      function isPlayerOutOfPieces(player) {
+        for (let row = 0; row < BOARD_SIZE; row++) {
+          for (let col = 0; col < BOARD_SIZE; col++) {
+            if (board[row][col] === player) {
+              return false; // O jogador ainda tem peças no tabuleiro
+            }
+          }
+        }
+        return true; // O jogador não tem mais peças no tabuleiro
+      }
+
+      // Verificar se o jogo acabou e quem ganhou
+      function checkGameOver() {
+        if (isPlayerOutOfPieces(WHITE)) {
+          console.log('O jogador BLACK venceu!');
+          isSpectator = true
+          document.getElementById("nome-vencedor").innerHTML = "Jogador 2"
+          document.getElementById('content-modal-vencedor').style.display = "flex"
+        } else if (isPlayerOutOfPieces(BLACK)) {
+          console.log('O jogador WHITE venceu!');
+          isSpectator = true
+          document.getElementById("nome-vencedor").innerHTML = "Jogador 1"
+          document.getElementById('content-modal-vencedor').style.display = "flex"
+        } else {
+          console.log('O jogo continua...');
+        }
+      }
+
+      // Variáveis de configuração
+      const EMPTY = 0;
+      const WHITE = 1;
+      const BLACK = 2;
+      const WHITE_KING = 3;
+      const BLACK_KING = 4;
+      const BOARD_SIZE = 8;
+
+      // Estado inicial do tabuleiro
+      let board = [
+        [0, 1, 0, 1, 0, 1, 0, 1],
+        [1, 0, 1, 0, 1, 0, 1, 0],
+        [0, 1, 0, 1, 0, 1, 0, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [2, 0, 2, 0, 2, 0, 2, 0],
+        [0, 2, 0, 2, 0, 2, 0, 2],
+        [2, 0, 2, 0, 2, 0, 2, 0],
+      ];
+
+      // Variável para controlar o jogador atual
+      let currentPlayer
+    </script>
+  </body>
+  <style>
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+
+    textarea:focus, input:focus {
+      box-shadow: 0 0 0 0;
+      outline: 0;
+    }
+
+    #background-modal {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      background-color: #4b3621;
+      opacity: 30%;
+    }
+
+    #content-modal-salas, #content-modal-esperando-jogador, #content-modal-vencedor {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      border-radius: 15px;
+      padding: 20px;
+      width: 40%;
+      height: 60%;
+      color: #fff;
+
+      /* From https://css.glass */
+      background: rgba(0, 0, 0, 0.38);
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(9.5px);
+      -webkit-backdrop-filter: blur(9.5px);
+      border: 1px solid rgba(0, 0, 0, 0.29);
+
+    }
+    @media only screen and (max-width: 750px) {
+      #content-modal-salas, #content-modal-esperando-jogador, #content-modal-vencedor {
+        width: 80%;
+        height: 70%;
+      }
+    }
+
+    #content-modal-esperando-jogador {
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #content-modal-esperando-jogador > h2 {
+      margin: 0;
+    }
+
+    #lista-salas {
+      max-height: 45%;
+      overflow-y: auto;
+      padding-right: 15px;
+    }
+
+    #lista-salas > li {
+      border: 1px solid #fff;
+      padding: 5px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    #container-criar-sala {
+      position: absolute;
+      bottom: 0;
+      margin-bottom: 30px;
+      width: 80%;
+    }
+
+    #input-nome-sala {
+      font-weight: bold;
+      padding: 8px 10px;
+      border-radius: 20px;
+      border: 2px solid #C3B1E1;
+      height: 22px; 
+      width: 100%;
+    }
+
+    #message-error-input {
+      font-style: italic;
+      color: #FF6347;
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
+    #button-criar-sala, #button-desconectar {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      color: #fff;
+      font-weight: bold;
+      padding: 8px 10px;
+      border-radius: 20px;
+      background-color: #C3B1E1;
+      border: 2px solid #fff;
+      cursor: pointer;
+      transition: all ease 0.5s;
+      height: 36px;
+    }
+
+    #button-criar-sala:hover {
+      background-color: #fff;
+      border: 2px solid #C3B1E1;
+      color: #C3B1E1;
+    }
+
+    #button-desconectar {
+      left: 20px;
+      bottom: 20px;
+      right: unset;
+    }
+
+    #content-modal-vencedor {
+      align-items: center;
+      display: none;
+    }
+
+    @keyframes pulseAnimation {
+      0% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+      }
+      50% {
+        -webkit-transform: scale(0.9);
+                transform: scale(0.9);
+      }
+      100% {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+      }
+    }
+
+    #primeiro-lugar {
+      width: 200px;
+      animation: pulseAnimation 3s ease-in-out infinite both;
+    }
+
+    @keyframes ldio-dq3yqct2vkg-1 {
+      0% { transform: rotate(0deg) }
+      50% { transform: rotate(-45deg) }
+      100% { transform: rotate(0deg) }
+    }
+    @keyframes ldio-dq3yqct2vkg-2 {
+        0% { transform: rotate(180deg) }
+      50% { transform: rotate(225deg) }
+      100% { transform: rotate(180deg) }
+    }
+    .ldio-dq3yqct2vkg > div:nth-child(2) {
+      transform: translate(-15px,0);
+    }
+    .ldio-dq3yqct2vkg > div:nth-child(2) div {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      width: 120px;
+      height: 60px;
+      border-radius: 120px 120px 0 0;
+      background: #ffffff;
+      animation: ldio-dq3yqct2vkg-1 1s linear infinite;
+      transform-origin: 60px 60px
+    }
+    .ldio-dq3yqct2vkg > div:nth-child(2) div:nth-child(2) {
+      animation: ldio-dq3yqct2vkg-2 1s linear infinite
+    }
+    .ldio-dq3yqct2vkg > div:nth-child(2) div:nth-child(3) {
+      transform: rotate(-90deg);
+      animation: none;
+    }@keyframes ldio-dq3yqct2vkg-3 {
+        0% { transform: translate(190px,0); opacity: 0 }
+      20% { opacity: 1 }
+      100% { transform: translate(70px,0); opacity: 1 }
+    }
+    .ldio-dq3yqct2vkg > div:nth-child(1) {
+      display: block;
+    }
+    .ldio-dq3yqct2vkg > div:nth-child(1) div {
+      position: absolute;
+      top: 92px;
+      left: -8px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #c95be1;
+      animation: ldio-dq3yqct2vkg-3 1s linear infinite
+    }
+    .ldio-dq3yqct2vkg > div:nth-child(1) div:nth-child(1) { animation-delay: -0.67s }
+    .ldio-dq3yqct2vkg > div:nth-child(1) div:nth-child(2) { animation-delay: -0.33s }
+    .ldio-dq3yqct2vkg > div:nth-child(1) div:nth-child(3) { animation-delay: 0s }
+    .loadingio-spinner-bean-eater-oi9uh73mnpl {
+      width: 200px;
+      height: 200px;
+      display: inline-block;
+      overflow: hidden;
+      background: rgba(NaN, NaN, NaN, 0);
+    }
+    .ldio-dq3yqct2vkg {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform: translateZ(0) scale(1);
+      backface-visibility: hidden;
+      transform-origin: 0 0; /* see note above */
+    }
+    .ldio-dq3yqct2vkg div { box-sizing: content-box; }
+    /* generated by https://loading.io/ */
+  </style>
+</html>

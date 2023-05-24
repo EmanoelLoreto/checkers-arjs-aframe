@@ -21,135 +21,136 @@
       </a-assets>
 
       <!-- Camera -->
-      <!-- <a-camera id="camera" look-controls="enabled: true" wasd-controls="enabled: true" position="3.5 25 30" preset="hiro">
+      <!-- <a-camera id="camera" look-controls="enabled: true" wasd-controls="enabled: true" position="3.5 5 3" preset="hiro">
         <a-cursor color="#fff"></a-cursor>
       </a-camera> -->
 
-      <a-marker-camera preset="hiro" position="5 10 10" rotation="-90 0 0" look-controls="enabled: true" wasd-controls="enabled: true">
+      <!-- <a-marker-camera position="5 10 10" rotation="-90 0 0" look-controls="enabled: true" wasd-controls="enabled: true">
         <a-camera position="0 0 0" look-controls="enabled: true" wasd-controls="enabled: true"></a-camera>
         <a-cursor color="#fff"></a-cursor>
-      </a-marker-camera>
+      </a-marker-camera> -->
 
-      <!-- <a-entity environment="preset: japan"></a-entity> -->
+      <a-entity position="3.5 0 25" camera look-controls="enabled: true" wasd-controls="enabled: true">
+        <a-cursor color="#fff"></a-cursor>
+      </a-entity>
 
       <!-- Tabuleiro -->
-      <a-marker>
+      <a-marker preset="hiro" position="0 0 0">
 
-      <a-plane src="#madeira" position="3.5 0.1 3.4" rotation="-90 0 0" width="12" height="12" color="#4b3621"></a-plane>
+      <a-plane position="3.5 0.1 3.4" rotation="-90 0 0" width="12" height="12" src="#madeira"  color="#4b3621"></a-plane>
       <a-plane position="3.5 0.2 3.4" rotation="-90 -0.1 0" width="8.4" height="8.4" src="#textura-marmore-branco"></a-plane>
 
       <a-plane position="0 0.3 0" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="1 0.3 0" clickable-row-1 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="1 0.3 0" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-1></a-plane>
       <a-plane position="2 0.3 0" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="3 0.3 0" clickable-row-2 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="3 0.3 0" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-2></a-plane>
       <a-plane position="4 0.3 0" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="5 0.3 0" clickable-row-3 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="5 0.3 0" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-3></a-plane>
       <a-plane position="6 0.3 0" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="7 0.3 0" clickable-row-4 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="7 0.3 0" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-4></a-plane>
 
-      <a-plane position="0 0.3 1" clickable-row-5 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="0 0.3 1" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-5></a-plane>
       <a-plane position="1 0.3 1" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="2 0.3 1" clickable-row-6 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="2 0.3 1" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-6></a-plane>
       <a-plane position="3 0.3 1" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="4 0.3 1" clickable-row-7 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="4 0.3 1" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-7></a-plane>
       <a-plane position="5 0.3 1" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="6 0.3 1" clickable-row-8 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="6 0.3 1" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-8></a-plane>
       <a-plane position="7 0.3 1" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
 
       <a-plane position="0 0.3 2" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="1 0.3 2" clickable-row-9 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="1 0.3 2" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-9></a-plane>
       <a-plane position="2 0.3 2" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="3 0.3 2" clickable-row-10 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="3 0.3 2" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-10></a-plane>
       <a-plane position="4 0.3 2" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="5 0.3 2" clickable-row-11 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="5 0.3 2" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-11></a-plane>
       <a-plane position="6 0.3 2" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="7 0.3 2" clickable-row-12 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="7 0.3 2" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-12></a-plane>
 
-      <a-plane position="0 0.3 3" clickable-row-13 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="0 0.3 3" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-13></a-plane>
       <a-plane position="1 0.3 3" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="2 0.3 3" clickable-row-14 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="2 0.3 3" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-14></a-plane>
       <a-plane position="3 0.3 3" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="4 0.3 3" clickable-row-15 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="4 0.3 3" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-15></a-plane>
       <a-plane position="5 0.3 3" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="6 0.3 3" clickable-row-16 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="6 0.3 3" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-16></a-plane>
       <a-plane position="7 0.3 3" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
 
       <a-plane position="0 0.3 4" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="1 0.3 4" clickable-row-17 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="1 0.3 4" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-17></a-plane>
       <a-plane position="2 0.3 4" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="3 0.3 4" clickable-row-18 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="3 0.3 4" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-18></a-plane>
       <a-plane position="4 0.3 4" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="5 0.3 4" clickable-row-19 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="5 0.3 4" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-19></a-plane>
       <a-plane position="6 0.3 4" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="7 0.3 4" clickable-row-20 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="7 0.3 4" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-20></a-plane>
 
-      <a-plane position="0 0.3 5" clickable-row-21 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="0 0.3 5" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-21></a-plane>
       <a-plane position="1 0.3 5" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="2 0.3 5" clickable-row-22 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="2 0.3 5" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-22></a-plane>
       <a-plane position="3 0.3 5" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="4 0.3 5" clickable-row-23 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="4 0.3 5" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-23></a-plane>
       <a-plane position="5 0.3 5" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="6 0.3 5" clickable-row-24 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="6 0.3 5" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-24></a-plane>
       <a-plane position="7 0.3 5" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
 
       <a-plane position="0 0.3 6" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="1 0.3 6" clickable-row-25 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="1 0.3 6" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-25></a-plane>
       <a-plane position="2 0.3 6" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="3 0.3 6" clickable-row-26 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="3 0.3 6" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-26></a-plane>
       <a-plane position="4 0.3 6" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="5 0.3 6" clickable-row-27 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="5 0.3 6" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-27></a-plane>
       <a-plane position="6 0.3 6" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="7 0.3 6" clickable-row-28 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="7 0.3 6" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-28></a-plane>
 
-      <a-plane position="0 0.3 7" clickable-row-29 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="0 0.3 7" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-29></a-plane>
       <a-plane position="1 0.3 7" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="2 0.3 7" clickable-row-30 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="2 0.3 7" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-30></a-plane>
       <a-plane position="3 0.3 7" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="4 0.3 7" clickable-row-31 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="4 0.3 7" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-31></a-plane>
       <a-plane position="5 0.3 7" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
-      <a-plane position="6 0.3 7" clickable-row-32 rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto"></a-plane>
+      <a-plane position="6 0.3 7" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-preto" clickable-row-32></a-plane>
       <a-plane position="7 0.3 7" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
 
       <!-- Peças -->
-      <a-cylinder id="peca-branca-1" peca-branca-1 position="1 0.3 0" src="#textura-marmore-branco" height="0.3" radius="0.30"></a-cylinder>
-      <a-cylinder id="peca-branca-2" peca-branca-2 position="3 0.3 0" src="#textura-marmore-branco" height="0.3" radius="0.30"></a-cylinder>
-      <a-cylinder id="peca-branca-3" peca-branca-3 position="5 0.3 0" src="#textura-marmore-branco" height="0.3" radius="0.30"></a-cylinder>
-      <a-cylinder id="peca-branca-4" peca-branca-4 position="7 0.3 0" src="#textura-marmore-branco" height="0.3" radius="0.30"></a-cylinder>
+      <a-cylinder position="1 0.3 0" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-1" peca-branca-1></a-cylinder>
+      <a-cylinder position="3 0.3 0" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-2" peca-branca-2></a-cylinder>
+      <a-cylinder position="5 0.3 0" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-3" peca-branca-3></a-cylinder>
+      <a-cylinder position="7 0.3 0" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-4" peca-branca-4></a-cylinder>
 
-      <a-cylinder id="peca-branca-5" peca-branca-5 position="0 0.3 1" src="#textura-marmore-branco" height="0.3" radius="0.30"></a-cylinder>
-      <a-cylinder id="peca-branca-6" peca-branca-6 position="2 0.3 1" src="#textura-marmore-branco" height="0.3" radius="0.30"></a-cylinder>
-      <a-cylinder id="peca-branca-7" peca-branca-7 position="4 0.3 1" src="#textura-marmore-branco" height="0.3" radius="0.30"></a-cylinder>
-      <a-cylinder id="peca-branca-8" peca-branca-8 position="6 0.3 1" src="#textura-marmore-branco" height="0.3" radius="0.30"></a-cylinder>
+      <a-cylinder position="0 0.3 1" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-5" peca-branca-5></a-cylinder>
+      <a-cylinder position="2 0.3 1" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-6" peca-branca-6></a-cylinder>
+      <a-cylinder position="4 0.3 1" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-7" peca-branca-7></a-cylinder>
+      <a-cylinder position="6 0.3 1" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-8" peca-branca-8></a-cylinder>
 
-      <a-cylinder id="peca-branca-9" peca-branca-9 position="1 0.3 2" src="#textura-marmore-branco" height="0.3" radius="0.30"></a-cylinder>
-      <a-cylinder id="peca-branca-10" peca-branca-10 position="3 0.3 2" src="#textura-marmore-branco" height="0.3" radius="0.30"></a-cylinder>
-      <a-cylinder id="peca-branca-11" peca-branca-11 position="5 0.3 2" src="#textura-marmore-branco" height="0.3" radius="0.30"></a-cylinder>
-      <a-cylinder id="peca-branca-12" peca-branca-12 position="7 0.3 2" src="#textura-marmore-branco" height="0.3" radius="0.30"></a-cylinder>
+      <a-cylinder position="1 0.3 2" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-9" peca-branca-9></a-cylinder>
+      <a-cylinder position="3 0.3 2" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-10" peca-branca-10></a-cylinder>
+      <a-cylinder position="5 0.3 2" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-11" peca-branca-11></a-cylinder>
+      <a-cylinder position="7 0.3 2" src="#textura-marmore-branco" height="0.3" radius="0.30" id="peca-branca-12" peca-branca-12></a-cylinder>
 
-      <a-cylinder id="peca-preta-1" peca-preta-1 position="0 0.3 5" src="#textura-marmore-roxo" height="0.3" radius="0.30"></a-cylinder>
-      <a-cylinder id="peca-preta-2" peca-preta-2 position="2 0.3 5" src="#textura-marmore-roxo" height="0.3" radius="0.30"></a-cylinder>
-      <a-cylinder id="peca-preta-3" peca-preta-3 position="4 0.3 5" src="#textura-marmore-roxo" height="0.3" radius="0.30"></a-cylinder>
-      <a-cylinder id="peca-preta-4" peca-preta-4 position="6 0.3 5" src="#textura-marmore-roxo" height="0.3" radius="0.30"></a-cylinder>
+      <a-cylinder position="0 0.3 5" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-1" peca-preta-1></a-cylinder>
+      <a-cylinder position="2 0.3 5" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-2" peca-preta-2></a-cylinder>
+      <a-cylinder position="4 0.3 5" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-3" peca-preta-3></a-cylinder>
+      <a-cylinder position="6 0.3 5" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-4" peca-preta-4></a-cylinder>
 
-      <a-cylinder id="peca-preta-5" peca-preta-5 position="1 0.3 6" src="#textura-marmore-roxo" height="0.3" radius="0.30"></a-cylinder>
-      <a-cylinder id="peca-preta-6" peca-preta-6 position="3 0.3 6" src="#textura-marmore-roxo" height="0.3" radius="0.30"></a-cylinder>
-      <a-cylinder id="peca-preta-7" peca-preta-7 position="5 0.3 6" src="#textura-marmore-roxo" height="0.3" radius="0.30"></a-cylinder>
-      <a-cylinder id="peca-preta-8" peca-preta-8 position="7 0.3 6" src="#textura-marmore-roxo" height="0.3" radius="0.30"></a-cylinder>
+      <a-cylinder position="1 0.3 6" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-5" peca-preta-5></a-cylinder>
+      <a-cylinder position="3 0.3 6" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-6" peca-preta-6></a-cylinder>
+      <a-cylinder position="5 0.3 6" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-7" peca-preta-7></a-cylinder>
+      <a-cylinder position="7 0.3 6" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-8" peca-preta-8></a-cylinder>
 
-      <a-cylinder id="peca-preta-9" peca-preta-9 position="0 0.3 7" src="#textura-marmore-roxo" height="0.3" radius="0.30"></a-cylinder>
-      <a-cylinder id="peca-preta-10" peca-preta-10 position="2 0.3 7" src="#textura-marmore-roxo" height="0.3" radius="0.30"></a-cylinder>
-      <a-cylinder id="peca-preta-11" peca-preta-11 position="4 0.3 7" src="#textura-marmore-roxo" height="0.3" radius="0.30"></a-cylinder>
-      <a-cylinder id="peca-preta-12" peca-preta-12 position="6 0.3 7" src="#textura-marmore-roxo" height="0.3" radius="0.30"></a-cylinder>
+      <a-cylinder position="0 0.3 7" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-9" peca-preta-9></a-cylinder>
+      <a-cylinder position="2 0.3 7" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-10" peca-preta-10></a-cylinder>
+      <a-cylinder position="4 0.3 7" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-11" peca-preta-11></a-cylinder>
+      <a-cylinder position="6 0.3 7" src="#textura-marmore-roxo" height="0.3" radius="0.30" id="peca-preta-12" peca-preta-12></a-cylinder>
 
 
-      <a-entity text="value: Jogador 1" scale="20 20" position="11 4 -5" rotation="0 0 0"></a-entity>
-      <a-entity id="nome-oponente" text="value: Player ID" scale="20 20" position="11 3 -5" rotation="0 0 0"></a-entity>
+      <a-entity position="11 4 -5" rotation="0 0 0" text="value: Jogador 1" scale="20 20" ></a-entity>
+      <a-entity position="11 3 -5" rotation="0 0 0" id="nome-oponente" text="value: Player ID" scale="20 20"></a-entity>
       
-      <a-entity text="value: Jogador 2" scale="20 20" position="-5 4 12" rotation="0 180 0"></a-entity>
-      <a-entity id="nome-jogador" text="value: Player ID" scale="20 20" position="-5 3 12" rotation="0 180 0"></a-entity>
+      <a-entity position="-5 4 12" rotation="0 180 0" text="value: Jogador 2" scale="20 20" ></a-entity>
+      <a-entity position="-5 3 12" rotation="0 180 0" id="nome-jogador" text="value: Player ID" scale="20 20"></a-entity>
 
-      <a-entity id="jogador-atual" text="value: Jogador 1" scale="20 20" position="8.5 0.3 11.5" rotation="-90 -90 0"></a-entity>
-      <a-entity id="espectadores" text="value: " scale="20 20" position="-1.5 0.3 -3.5" rotation="-90 90 0"></a-entity>
+      <a-entity position="8.5 0.3 11.5" rotation="-90 -90 0" id="jogador-atual" text="value: Jogador 1" scale="20 20"></a-entity>
     </a-marker>
     </a-scene>
 

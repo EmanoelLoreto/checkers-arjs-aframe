@@ -157,7 +157,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
-  res.sendFile("index.html");
+  res.sendFile(path.join(__dirname, "checkers-enviroment.html"));
+});
+
+app.get("/ar", (req, res) => {
+  res.sendFile(path.join(__dirname, "checkers-ar.html"));
 });
 
 server.listen(3000, () => {

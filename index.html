@@ -20,9 +20,22 @@
         <img id="textura-marmore-roxo" src="./assets/textura-marmore-roxo.jpg">
       </a-assets>
 
-      <a-plane src="#madeira" position="3.5 0.1 3.4" rotation="-90 0 0" width="12" height="12" color="#4b3621"></a-plane>
+      <!-- Camera -->
+      <!-- <a-camera id="camera" look-controls="enabled: true" wasd-controls="enabled: true" position="3.5 25 30" preset="hiro">
+        <a-cursor color="#fff"></a-cursor>
+      </a-camera> -->
+
+      <a-marker-camera preset="hiro" position="5 10 10" rotation="-90 0 0" look-controls="enabled: true" wasd-controls="enabled: true">
+        <a-camera position="0 0 0" look-controls="enabled: true" wasd-controls="enabled: true"></a-camera>
+        <a-cursor color="#fff"></a-cursor>
+      </a-marker-camera>
+
+      <!-- <a-entity environment="preset: japan"></a-entity> -->
 
       <!-- Tabuleiro -->
+      <a-marker>
+
+      <a-plane src="#madeira" position="3.5 0.1 3.4" rotation="-90 0 0" width="12" height="12" color="#4b3621"></a-plane>
       <a-plane position="3.5 0.2 3.4" rotation="-90 -0.1 0" width="8.4" height="8.4" src="#textura-marmore-branco"></a-plane>
 
       <a-plane position="0 0.3 0" rotation="-90 0 0" width="1" height="1" src="#textura-marmore-branco"></a-plane>
@@ -138,13 +151,7 @@
 
       <a-entity id="jogador-atual" text="value: Jogador 1" scale="20 20" position="8.5 0.3 11.5" rotation="-90 -90 0"></a-entity>
       <a-entity id="espectadores" text="value: " scale="20 20" position="-1.5 0.3 -3.5" rotation="-90 90 0"></a-entity>
-
-      <!-- Camera -->
-      <a-camera id="camera" look-controls="enabled: true" wasd-controls="enabled: true" position="3.5 6 8">
-        <a-cursor color="#fff"></a-cursor>
-      </a-camera>
-
-      <a-entity environment="preset: japan"></a-entity>
+    </a-marker>
     </a-scene>
 
     <div id="background-modal"></div>
@@ -701,7 +708,7 @@
       border-radius: 20px;
       border: 2px solid #C3B1E1;
       height: 22px; 
-      width: 250px;
+      width: 85%;
     }
 
     #message-error-input {

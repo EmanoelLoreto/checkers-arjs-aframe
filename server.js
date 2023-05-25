@@ -92,7 +92,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on('joinRoomAsSpectator', roomName => {
-    console.log('joinRoomAsSpectator', roomName);
     const room = rooms.get(roomName);
     if (room) {
       socket.join(roomName);

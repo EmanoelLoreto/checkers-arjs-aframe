@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  checkers-arjs-aframe:
+    container_name: checkers-arjs-aframe
+    build: .
+    command: npm run start
+    ports:
+      - 10005:10005
+    restart: always

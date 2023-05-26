@@ -352,7 +352,14 @@
       socket.on('jogada', data => {
         const { row, col, id, color } = data.selectedPiece;
 
-        currentPlayer = currentPlayer === WHITE ? BLACK : WHITE;
+        console.log('jogada', data)
+
+        if (data.canPlayAgain) {
+          currentPlayer = currentPlayer
+        } else {
+          currentPlayer = currentPlayer === WHITE ? BLACK : WHITE;
+        }
+
         board = data.board;
 
         exibe();
@@ -484,8 +491,6 @@
         if (selectedPiece) {
           if (isValidMove(selectedPiece, row, col)) {
             movePiece(selectedPiece, row, col);
-            updateBoard(selectedPiece, row, col);
-            canPlay = false;
             selectedPiece = null;
           } else {
             console.info('Invalid move!');
@@ -507,12 +512,24 @@
         // Check the direction of the move based on the piece's color
         const direction = currentPlayer === WHITE ? 1 : -1;
 
-        // Check if it's a valid forward diagonal move
         if (destRow === row + direction && Math.abs(destCol - col) === 1) {
-          // Simple move on the forward diagonal
           return true;
-        } else if (destRow === row + 2 * direction && Math.abs(destCol - col) === 2) {
-          // Capture of an opponent's piece by jumping over it
+        }
+
+        // Check if it's a valid forward diagonal move for a regular piece
+        if (destRow === row + direction && Math.abs(destCol - col) === 1) {
+          return true;
+        }
+
+        // Check if it's a valid forward or backward diagonal move for a king
+        if (board[row][col] === WHITE_KING || board[row][col] === BLACK_KING) {
+          if (destRow === row - direction && Math.abs(destCol - col) === 1) {
+            return true;
+          }
+        }
+
+        // Check if it's a valid capture move
+        if (destRow === row + 2 * direction && Math.abs(destCol - col) === 2) {
           const capturedRow = row + direction;
           const capturedCol = (destCol + col) / 2;
 
@@ -532,6 +549,39 @@
         return false;
       }
 
+      function getValidJumps(piece, row, col) {
+        const jumps = [];
+      
+        // Check all possible jump directions
+        const directions = [
+          { row: -2, col: -2 }, // Top-left
+          { row: -2, col: 2 }, // Top-right
+          { row: 2, col: -2 }, // Bottom-left
+          { row: 2, col: 2 } // Bottom-right
+        ];
+      
+        for (const direction of directions) {
+          const captureRow = row + direction.row;
+          const captureCol = col + direction.col;
+          const destRow = row + 2 * direction.row;
+          const destCol = col + 2 * direction.col;
+      
+          // Check if the capture and destination positions are within the board bounds
+          if (isValidPosition(captureRow, captureCol) && isValidPosition(destRow, destCol)) {
+            if (board[captureRow][captureCol] !== EMPTY && !isPieceColorValid(board[captureRow][captureCol]) && board[destRow][destCol] === EMPTY) {
+              // Store the valid jump
+              jumps.push({ row: destRow, col: destCol });
+      
+              // Recursively check for additional jumps from the new position
+              const additionalJumps = getValidJumps(piece, destRow, destCol);
+              jumps.push(...additionalJumps);
+            }
+          }
+        }
+      
+        return jumps;
+      }
+
       function movePiece(piece, destRow, destCol) {
         const { row, col, id, color } = piece;
 
@@ -545,12 +595,24 @@
           promotePiece(destRow, destCol);
         }
 
+        let canPlayAgain = false
+
         if (Math.abs(destRow - row) === 2 && Math.abs(destCol - col) === 2) {
           const capturedRow = (destRow + row) / 2;
           const capturedCol = (destCol + col) / 2;
 
           board[capturedRow][capturedCol] = EMPTY;
+
+          const additionalJumps = getValidJumps(piece, destRow, destCol);
+          if (additionalJumps.length > 0) {
+            // Allow for a double jump
+            canPlayAgain = true;
+          } else {
+            canPlayAgain = false;
+          }
         }
+
+        updateBoard(selectedPiece, row, col, canPlayAgain);
       }
 
       function shouldPromote(row) {
@@ -559,8 +621,12 @@
 
       function promotePiece(row, col) {
         const piece = board[row][col];
-        const promotedPiece = currentPlayer === WHITE ? WHITE_KING : BLACK_KING;
-        board[row][col] = promotedPiece;
+      
+        if (piece === WHITE && row === 0) {
+          board[row][col] = WHITE_KING;
+        } else if (piece === BLACK && row === BOARD_SIZE - 1) {
+          board[row][col] = BLACK_KING;
+        }
       }
 
       function exibe() {

@@ -163,6 +163,6 @@ app.get("/ar", (req, res) => {
   res.sendFile(path.join(__dirname, "checkers-ar.html"));
 });
 
-server.listen(3000, () => {
-  console.log("Rodando na porta 3000");
+server.listen(10005, () => {
+  console.log("Rodando na porta 10005");
 });

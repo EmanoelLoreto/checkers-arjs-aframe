@@ -163,6 +163,14 @@ app.get("/ar", (req, res) => {
   res.sendFile(path.join(__dirname, "checkers-ar.html"));
 });
 
+app.get("/vr", (req, res) => {
+  res.sendFile(path.join(__dirname, "checkers-enviroment-vr.html"));
+});
+
+app.get("/3d-ar", (req, res) => {
+  res.sendFile(path.join(__dirname, "ar.html"));
+});
+
 server.listen(10005, () => {
   console.log("Rodando na porta 10005");
 });

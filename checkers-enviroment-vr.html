@@ -134,7 +134,7 @@
       <a-entity id="jogador-atual" text="value: Player 1" scale="20 20" position="8.5 2.05 11.8" rotation="-70 -90 0"></a-entity>
 
       <!-- Camera -->
-      <a-camera id="camera" look-controls="enabled: true; pointerLockEnabled: true" wasd-controls="enabled: true" position="3.5 8 8">
+      <a-camera id="camera" look-controls="enabled: true; pointerLockEnabled: true" wasd-controls="enabled: false" position="3.5 10 13">
         <a-cursor color="#fff"></a-cursor>
       </a-camera>
 
@@ -316,10 +316,10 @@
 
         const camera = document.getElementById("camera");
         if (playerId == room.players[0]) {
-          camera.setAttribute("position", "3.5 7 8");
+          camera.setAttribute("position", "3.5 10 13");
           camera.setAttribute("rotation", "-90 0 0");
         } else {
-          camera.setAttribute("position", "3.5 7 -1");
+          camera.setAttribute("position", "3.5 10 -6");
           camera.setAttribute("rotation", "-90 0 0");
         }
 
